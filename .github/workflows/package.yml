@@ -56,13 +56,15 @@ jobs:
 
       # Exercise 2: Implement Windows build steps here
       # You can refer to the macOS build steps above for guidance
-      # - name: Build with PyInstaller (Windows x64)
-      #   ...
+      - name: Build with PyInstaller (Windows x64)
+        run: |
+          pyinstaller --onefile app/hello.py -n hello-windows-x64
 
-      - name: Debug dist
-        shell: pwsh
-        run: dir dist || true
-
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-windows-x64
+          path: dist/hello-windows-x64.exe
       # Exercise 3: Implement artifact upload here
       # - name: Upload Windows artifact
       #   uses: actions/upload-artifact@v4
